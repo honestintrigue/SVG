@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>SVG Homework</title>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/snap.svg/0.4.1/snap.svg-min.js"></script>
+  <script>
+  // Make the variables global so they can be used in multiple functions
+  var red;
+  var orange;
+  var circle;
+  window.onload = function () {
+    var s = Snap("#svgout"); // ID where SVG loads in page
+
+    // load SVG and do stuff to it
+    Snap.load("hnlogo.svg", function (logo) {
+      // get layers of SVG
+      red = logo.select("#red");
+      orange = logo.select("#orange");
+      circle = logo.select("#circle");
+      s.append(logo); // append SVG to #svgout
+
+      drawATK(); // drawing function
+    });
+  }
+
+  function drawATK() {
+    // Hide LetterA and move it up 100 pixels
+    red.attr({ opacity: 0, transform: "t-100,-100" });
+
+    // Hide LetterT and rotate it 360 degrees
+    orange.attr({ opacity: 0, transform: "t0,0,r0" });
+
+    // Hide LetterK and scale it down
+    circle.attr({ opacity: 0, transform: "S.1,0,0" });
+
+    // Animate LetterA over 500ms,
+    // change opacity and move to original position
+    red.animate({ opacity: 1, transform: "t0,0" },1000);
+
+    // Animate LetterT over 1000ms,
+    // change opacity and rotate to zero
+    orange.animate({ opacity: 1, transform: "t0,0,r360" },1000);
+
+    // Animate LetterK over 1500ms,
+    // change opacity and scale to original size (1)
+    circle.animate({ opacity: 1, transform: "S1,0,0" },1500);
+
+    setTimeout('drawhnlogo()',3000); // call drawATK again after 3000 ms
+  }
+  </script>
+
+</head>
+
+<body>
+<svg id="svgout"></svg>
+</body>
+
+</html>
